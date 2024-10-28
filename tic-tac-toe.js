@@ -1,9 +1,23 @@
 document.addEventListener("DOMContentLoaded", function(){
     const squares=document.querySelectorAll('#board div');
+    const newGameButton=document.querySelector(".btn");
     let thisPlayer='X';
     //Initializing array to keep game state
     const stateofgame= Array(9).fill(null); 
     const status= document.getElementById("status")
+
+    function restartGame(){
+        stateofgame.fill(null);
+        squares.forEach((square)=> {
+            square.textContent="";
+            square.classList.remove('X','O','hover');
+        });
+        thisPlayer='X';
+        status.textContent="Move your mouse over a square and click to play an X or an O."
+        status.classList.remove("you-won");
+    }
+    newGameButton.addEventListener("click",restartGame);
+
     squares.forEach((square, index) => {
         square.classList.add("square");
         square.addEventListener('click',function(){
@@ -50,17 +64,6 @@ document.addEventListener("DOMContentLoaded", function(){
             );
         });
     }
-    function restartGame(){
-        stateofgame.fill(null);
-        squares.forEach((square)=> {
-            square.textContent="";
-            square.classList.remove('X','O','hover');
-        });
-        thisPlayer='X';
-        status.textContent="Move your mouse over a square and click to play an X or an O."
-        status.classList.remove("you-won");
-    }
-    NewGameButton.addEventListener("click",restartGame);
 
 });
 
